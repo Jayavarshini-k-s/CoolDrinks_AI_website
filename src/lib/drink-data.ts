@@ -1,3 +1,4 @@
+
 export interface DrinkVariant {
   id: string;
   name: string;
@@ -33,7 +34,7 @@ export const drinkVariants: DrinkVariant[] = [
     themeColor: 'hsl(350 85% 60%)', // A vibrant cherry red
     sequence: {
       urls: generateFrameUrls(
-        'https://omqaodalyvzbrvckcumi.supabase.co/storage/v1/object/public/assets/soda-cherry/frame_{frame}.webp',
+        'https://omqaodalyvzbrvckcumi.supabase.co/storage/v1/object/public/assets/soda/frame_{frame}.webp',
         240,
         4
       ),
@@ -63,10 +64,9 @@ export const drinkVariants: DrinkVariant[] = [
     themeColor: 'hsl(55 90% 60%)', // A bright lemon yellow
     sequence: {
       urls: generateFrameUrls(
-        'https://omqaodalyvzbrvckcumi.supabase.co/storage/v1/object/public/assets/soda-lemon/frame_{frame}.webp',
+        'https://omqaodalyvzbrvckcumi.supabase.co/storage/v1/object/public/assets/soda3/frame_{frame}.webp',
         240,
-        4,
-        0
+        4
       ),
       frameCount: 240,
     },
