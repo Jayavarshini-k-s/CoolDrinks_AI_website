@@ -15,33 +15,27 @@ export default function useImagePreloader(urls: string[]) {
 
     setLoaded(false);
     setProgress(0);
-    setImages([]);
+    
+    const imagePromises = urls.map((url, index) => {
+      return new Promise<HTMLImageElement>((resolve, reject) => {
+        const img = new Image();
+        img.src = url;
+        img.onload = () => {
+            setProgress(prev => prev + (100 / urls.length));
+            resolve(img);
+        };
+        img.onerror = () => {
+            // Resolve even on error to not block the app
+            setProgress(prev => prev + (100 / urls.length));
+            resolve(img);
+        };
+      });
+    });
 
-    let loadedCount = 0;
-    const totalCount = urls.length;
-    const imageElements: HTMLImageElement[] = [];
-
-    urls.forEach((url, index) => {
-      const img = new Image();
-      imageElements[index] = img;
-      img.onload = () => {
-        loadedCount++;
-        setProgress((loadedCount / totalCount) * 100);
-        if (loadedCount === totalCount) {
-          setImages(imageElements);
-          setLoaded(true);
-        }
-      };
-      img.onerror = () => {
-        // Handle error: maybe count it as loaded to not block the app
-        loadedCount++;
-        setProgress((loadedCount / totalCount) * 100);
-        if (loadedCount === totalCount) {
-          setImages(imageElements);
-          setLoaded(true);
-        }
-      };
-      img.src = url;
+    Promise.all(imagePromises).then(loadedImages => {
+      setImages(loadedImages.filter(img => img.complete && img.naturalHeight !== 0));
+      setLoaded(true);
+      setProgress(100);
     });
 
   }, [urls]);
