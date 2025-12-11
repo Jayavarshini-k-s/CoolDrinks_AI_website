@@ -1,8 +1,9 @@
 import React from 'react';
 import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
-import { placeholderImages } from '@/lib/placeholder-images.json';
+import data from '@/lib/placeholder-images.json';
 
+const { placeholderImages } = data;
 const ctaImage = placeholderImages.find(p => p.id === "grape-cta");
 
 export default function ProductSection() {
