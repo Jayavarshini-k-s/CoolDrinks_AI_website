@@ -32,8 +32,12 @@ export const drinkVariants: DrinkVariant[] = [
     description: 'A modern take on a classic soda with a perfect blend of sweet and tart, full of nostalgic flavor.',
     themeColor: 'hsl(350 85% 60%)', // A vibrant cherry red
     sequence: {
-      urls: generateFrameUrls('https://picsum.photos/seed/cherry-{frame}/1920/1080', 80, 1),
-      frameCount: 80,
+      urls: generateFrameUrls(
+        'https://omqaodalyvzbrvckcumi.supabase.co/storage/v1/object/public/assets/soda-cherry/frame_{frame}.webp',
+        240,
+        4
+      ),
+      frameCount: 240,
     },
   },
   {
@@ -58,8 +62,13 @@ export const drinkVariants: DrinkVariant[] = [
     description: 'Bright and refreshing citrus soda with natural lemon spark and crisp bubbles.',
     themeColor: 'hsl(55 90% 60%)', // A bright lemon yellow
     sequence: {
-      urls: generateFrameUrls('https://picsum.photos/seed/lemon-{frame}/1920/1080', 80, 1),
-      frameCount: 80,
+      urls: generateFrameUrls(
+        'https://omqaodalyvzbrvckcumi.supabase.co/storage/v1/object/public/assets/soda-lemon/frame_{frame}.webp',
+        240,
+        4,
+        0
+      ),
+      frameCount: 240,
     },
   },
 ];
