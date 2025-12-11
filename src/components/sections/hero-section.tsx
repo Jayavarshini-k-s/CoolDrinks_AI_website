@@ -46,7 +46,7 @@ export default function HeroSection({ initialImages }: HeroSectionProps) {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas || images.length === 0) return;
+    if (!canvas || images.length === 0 || !variantLoaded) return;
     
     const context = canvas.getContext('2d');
     if (!context) return;
@@ -59,7 +59,7 @@ export default function HeroSection({ initialImages }: HeroSectionProps) {
 
     const drawFrame = (frameIndex: number) => {
         const img = images[frameIndex];
-        if (!img || !img.complete || img.naturalHeight === 0) return;
+        if (!img) return;
         context.clearRect(0, 0, canvas.width, canvas.height);
         
         const imgAspectRatio = img.width / img.height;
@@ -107,7 +107,7 @@ export default function HeroSection({ initialImages }: HeroSectionProps) {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', resizeCanvas);
     };
-  }, [images]);
+  }, [images, variantLoaded]);
   
   return (
     <div style={{ height: `${(ANIMATION_SCROLL_HEIGHT + 1) * 100}vh` }}>
