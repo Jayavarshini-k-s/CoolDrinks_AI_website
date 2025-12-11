@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { drinkVariants } from '@/lib/drink-data';
 import useImagePreloader from '@/hooks/use-image-preloader';
 
@@ -18,16 +18,8 @@ import Footer from '@/components/layout/footer';
 export default function Home() {
   const initialVariant = useMemo(() => drinkVariants[0], []);
   const { progress, images, loaded } = useImagePreloader(initialVariant.sequence.urls);
-  const [showContent, setShowContent] = useState(false);
-
-  useEffect(() => {
-    if (loaded) {
-      const timer = setTimeout(() => setShowContent(true), 500); // Delay for fade-out animation
-      return () => clearTimeout(timer);
-    }
-  }, [loaded]);
   
-  if (!showContent) {
+  if (!loaded) {
     return <LoadingScreen progress={progress} />;
   }
 
