@@ -58,9 +58,10 @@ export default function HeroSection({ initialImages }: HeroSectionProps) {
     };
 
     const drawFrame = (frameIndex: number) => {
-        if (!images[frameIndex]) return;
-        context.clearRect(0, 0, canvas.width, canvas.height);
         const img = images[frameIndex];
+        if (!img || !img.complete || img.naturalHeight === 0) return; // Check if image is loaded and not broken
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        
         const imgAspectRatio = img.width / img.height;
         const canvasAspectRatio = canvas.width / canvas.height;
         
