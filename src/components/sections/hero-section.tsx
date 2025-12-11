@@ -5,7 +5,7 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { drinkVariants, type DrinkVariant } from '@/lib/drink-data';
 import useImagePreloader from '@/hooks/use-image-preloader';
 import { Button } from '@/components/ui/button';
-import { ArrowUp, ArrowDown, Twitter, Instagram, Facebook, Loader2 } from 'lucide-react';
+import { ArrowUp, ArrowDown, Twitter, Instagram, Facebook, LoaderCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const ANIMATION_SCROLL_HEIGHT = 4; // in viewport heights
@@ -59,7 +59,7 @@ export default function HeroSection({ initialImages }: HeroSectionProps) {
 
     const drawFrame = (frameIndex: number) => {
         const img = images[frameIndex];
-        if (!img) return;
+        if (!img || !img.complete || img.naturalHeight === 0) return;
         context.clearRect(0, 0, canvas.width, canvas.height);
         
         const imgAspectRatio = img.width / img.height;
@@ -142,7 +142,7 @@ export default function HeroSection({ initialImages }: HeroSectionProps) {
             <div className="absolute right-6 md:right-8 top-1/2 -translate-y-1/2 flex items-center gap-4 text-white">
               <div className="text-right">
                 <div className="relative">
-                  {!variantLoaded && <Loader2 className="absolute -left-12 top-1/2 -translate-y-1/2 h-8 w-8 animate-spin text-white" />}
+                  {!variantLoaded && <LoaderCircle className="absolute -left-12 top-1/2 -translate-y-1/2 h-8 w-8 animate-spin text-white" />}
                   <span className="text-7xl md:text-9xl font-black tracking-tighter mix-blend-difference">
                     {(currentVariantIndex + 1).toString().padStart(2, '0')}
                   </span>
