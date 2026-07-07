@@ -17,7 +17,7 @@ const generateFrameUrls = (
   start: number = 0
 ): string[] => {
   const urls: string[] = [];
-  for (let i = start; i < start + frameCount; i++) {
+  for (let i = start; i < frameCount; i++) {
     const frameNum = i.toString().padStart(pad, '0');
     urls.push(base.replace('{frame}', frameNum));
   }
