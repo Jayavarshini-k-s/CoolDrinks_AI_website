@@ -1,0 +1,75 @@
+[debug] [2026-07-07T17:53:26.338Z] ----------------------------------------------------------------------
+[debug] [2026-07-07T17:53:26.350Z] Command:       /nix/store/ws50yvm6vzlzf7jzz6n7xh4szddrack1-nodejs-20.19.1/bin/node /home/user/.global_modules/bin/firebase deploy --only hosting
+[debug] [2026-07-07T17:53:26.351Z] CLI Version:   15.0.0
+[debug] [2026-07-07T17:53:26.351Z] Platform:      linux
+[debug] [2026-07-07T17:53:26.351Z] Node Version:  v20.19.1
+[debug] [2026-07-07T17:53:26.352Z] Time:          Tue Jul 07 2026 17:53:26 GMT+0000 (Coordinated Universal Time)
+[debug] [2026-07-07T17:53:26.352Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-07-07T17:53:26.356Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2026-07-07T17:53:34.869Z] Checked if tokens are valid: false, expires at: 1765510294086
+[debug] [2026-07-07T17:53:34.869Z] Checked if tokens are valid: false, expires at: 1765510294086
+[debug] [2026-07-07T17:53:34.870Z] > refreshing access token with scopes: []
+[debug] [2026-07-07T17:53:34.871Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-07-07T17:53:34.871Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-07-07T17:53:34.932Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2026-07-07T17:53:34.933Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-07-07T17:53:34.937Z] >>> [apiv2][query] GET https://monospace-pa.googleapis.com/v1/workspaces/studio-1358706414 [none]
+[debug] [2026-07-07T17:53:35.067Z] <<< [apiv2][status] GET https://monospace-pa.googleapis.com/v1/workspaces/studio-1358706414 401
+[debug] [2026-07-07T17:53:35.068Z] <<< [apiv2][body] GET https://monospace-pa.googleapis.com/v1/workspaces/studio-1358706414 {"error":{"code":401,"message":"Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.","status":"UNAUTHENTICATED"}}
+[debug] [2026-07-07T17:53:35.068Z] Got a 401 Unauthenticated error for a call that required authentication. Refreshing tokens.
+[debug] [2026-07-07T17:53:35.068Z] Checked if tokens are valid: false, expires at: 1765510294086
+[debug] [2026-07-07T17:53:35.068Z] Checked if tokens are valid: false, expires at: 1765510294086
+[debug] [2026-07-07T17:53:35.068Z] > refreshing access token with scopes: []
+[debug] [2026-07-07T17:53:35.069Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-07-07T17:53:35.072Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-07-07T17:53:35.097Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2026-07-07T17:53:35.099Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[error] Failed to fetch Firebase Project from current Studio Workspace: Request to https://monospace-pa.googleapis.com/v1/workspaces/studio-1358706414 had HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
+[debug] [2026-07-07T17:53:35.108Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/userinfo.email"]
+[debug] [2026-07-07T17:53:35.110Z] > authorizing via signed-in user (jayavarshiniks1@gmail.com)
+[debug] [2026-07-07T17:53:35.110Z] [iam] checking project studio-1358706414-580d0 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2026-07-07T17:53:35.111Z] Checked if tokens are valid: false, expires at: 1765510294086
+[debug] [2026-07-07T17:53:35.111Z] Checked if tokens are valid: false, expires at: 1765510294086
+[debug] [2026-07-07T17:53:35.113Z] > refreshing access token with scopes: []
+[debug] [2026-07-07T17:53:35.115Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-07-07T17:53:35.115Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-07-07T17:53:35.131Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2026-07-07T17:53:35.132Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-07-07T17:53:35.132Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/studio-1358706414-580d0:testIamPermissions [none]
+[debug] [2026-07-07T17:53:35.132Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/studio-1358706414-580d0:testIamPermissions x-goog-quota-user=projects/studio-1358706414-580d0
+[debug] [2026-07-07T17:53:35.134Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/studio-1358706414-580d0:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-07-07T17:53:35.234Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2026-07-07T17:53:35.235Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2026-07-07T17:53:35.976Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/studio-1358706414-580d0:testIamPermissions 401
+[debug] [2026-07-07T17:53:35.977Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/studio-1358706414-580d0:testIamPermissions {"error":{"code":401,"message":"Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.","status":"UNAUTHENTICATED","details":[{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"ACCESS_TOKEN_TYPE_UNSUPPORTED","metadata":{"service":"cloudresourcemanager.googleapis.com","method":"google.cloudresourcemanager.v1.Projects.TestIamPermissions"}}]}}
+[debug] [2026-07-07T17:53:35.977Z] Got a 401 Unauthenticated error for a call that required authentication. Refreshing tokens.
+[debug] [2026-07-07T17:53:35.977Z] Checked if tokens are valid: false, expires at: 1765510294086
+[debug] [2026-07-07T17:53:35.977Z] Checked if tokens are valid: false, expires at: 1765510294086
+[debug] [2026-07-07T17:53:35.977Z] > refreshing access token with scopes: []
+[debug] [2026-07-07T17:53:35.978Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-07-07T17:53:35.978Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-07-07T17:53:35.991Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2026-07-07T17:53:35.993Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-07-07T17:53:35.994Z] [iam] error while checking permissions, command may fail: Request to https://cloudresourcemanager.googleapis.com/v1/projects/studio-1358706414-580d0:testIamPermissions had HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
+[debug] [2026-07-07T17:53:35.995Z] Checked if tokens are valid: false, expires at: 1765510294086
+[debug] [2026-07-07T17:53:35.995Z] Checked if tokens are valid: false, expires at: 1765510294086
+[debug] [2026-07-07T17:53:35.995Z] > refreshing access token with scopes: []
+[debug] [2026-07-07T17:53:35.996Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-07-07T17:53:35.996Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-07-07T17:53:36.012Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2026-07-07T17:53:36.014Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-07-07T17:53:36.014Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/studio-1358706414-580d0 [none]
+[debug] [2026-07-07T17:53:36.043Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/studio-1358706414-580d0 401
+[debug] [2026-07-07T17:53:36.043Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/studio-1358706414-580d0 {"error":{"code":401,"message":"Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.","status":"UNAUTHENTICATED"}}
+[debug] [2026-07-07T17:53:36.044Z] Got a 401 Unauthenticated error for a call that required authentication. Refreshing tokens.
+[debug] [2026-07-07T17:53:36.044Z] Checked if tokens are valid: false, expires at: 1765510294086
+[debug] [2026-07-07T17:53:36.046Z] Checked if tokens are valid: false, expires at: 1765510294086
+[debug] [2026-07-07T17:53:36.046Z] > refreshing access token with scopes: []
+[debug] [2026-07-07T17:53:36.047Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-07-07T17:53:36.047Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-07-07T17:53:36.065Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2026-07-07T17:53:36.065Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-07-07T17:53:36.066Z] Request to https://firebase.googleapis.com/v1beta1/projects/studio-1358706414-580d0 had HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
+[error] 
+[error] Error: Assertion failed: resolving hosting target of a site with no site name or target name. This should have caused an error earlier
