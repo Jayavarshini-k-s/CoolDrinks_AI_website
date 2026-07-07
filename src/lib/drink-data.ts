@@ -1,4 +1,3 @@
-
 export interface DrinkVariant {
   id: string;
   name: string;
@@ -15,7 +14,7 @@ const generateFrameUrls = (
   base: string,
   frameCount: number,
   pad: number,
-  start: number = 1
+  start: number = 0
 ): string[] => {
   const urls: string[] = [];
   for (let i = start; i < start + frameCount; i++) {
@@ -34,11 +33,11 @@ export const drinkVariants: DrinkVariant[] = [
     themeColor: 'hsl(350 85% 60%)',
     sequence: {
       urls: generateFrameUrls(
-        'https://omqaodalyvzbrvckcumi.supabase.co/storage/v1/object/public/assets/soda/frame_{frame}.webp',
-        240,
-        4
+        'https://jqeccltitwtjzrxxeguo.supabase.co/storage/v1/object/public/Olipop%20Cherry/frame_{frame}_delay-0.1s.webp',
+        80,
+        2
       ),
-      frameCount: 240,
+      frameCount: 80,
     },
   },
   {
@@ -49,11 +48,11 @@ export const drinkVariants: DrinkVariant[] = [
     themeColor: 'hsl(289 44% 53%)',
     sequence: {
       urls: generateFrameUrls(
-        'https://omqaodalyvzbrvckcumi.supabase.co/storage/v1/object/public/assets/soda2/frame_{frame}.webp',
-        240,
-        4
+        'https://jqeccltitwtjzrxxeguo.supabase.co/storage/v1/object/public/Olipop%20Grapes/frame_{frame}_delay-0.1s.webp',
+        80,
+        2
       ),
-      frameCount: 240,
+      frameCount: 80,
     },
   },
   {
@@ -64,11 +63,11 @@ export const drinkVariants: DrinkVariant[] = [
     themeColor: 'hsl(55 90% 60%)',
     sequence: {
       urls: generateFrameUrls(
-        'https://omqaodalyvzbrvckcumi.supabase.co/storage/v1/object/public/assets/soda3/frame_{frame}.webp',
-        240,
-        4
+        'https://jqeccltitwtjzrxxeguo.supabase.co/storage/v1/object/public/Olipop%20Lemon/frame_{frame}_delay-0.1s.webp',
+        80,
+        2
       ),
-      frameCount: 240,
+      frameCount: 80,
     },
   },
 ];

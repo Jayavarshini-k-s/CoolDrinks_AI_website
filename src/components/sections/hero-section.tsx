@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState, useRef, useEffect, useCallback } from 'react';
@@ -23,7 +22,6 @@ export default function HeroSection({ initialImages }: HeroSectionProps) {
   const currentVariant = drinkVariants[currentVariantIndex];
   const { urls: preloadUrls } = currentVariant.sequence;
   
-  // Only preload if it's not the first variant (which is already preloaded by the parent)
   const { images: preloadedImages, loaded: variantLoaded } = useImagePreloader(
     currentVariantIndex === 0 ? [] : preloadUrls
   );
@@ -109,7 +107,6 @@ export default function HeroSection({ initialImages }: HeroSectionProps) {
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', resizeCanvas);
 
-    // Initial draw to ensure something is visible immediately
     drawFrame(0, canvas, context, images);
 
     return () => {
