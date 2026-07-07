@@ -31,7 +31,7 @@ export const drinkVariants: DrinkVariant[] = [
     name: 'Cherry',
     subtitle: 'Soda',
     description: 'A modern take on a classic soda with a perfect blend of sweet and tart, full of nostalgic flavor.',
-    themeColor: 'hsl(350 85% 60%)', // A vibrant cherry red
+    themeColor: 'hsl(350 85% 60%)',
     sequence: {
       urls: generateFrameUrls(
         'https://omqaodalyvzbrvckcumi.supabase.co/storage/v1/object/public/assets/soda/frame_{frame}.webp',
@@ -46,7 +46,7 @@ export const drinkVariants: DrinkVariant[] = [
     name: 'Grape',
     subtitle: 'Soda',
     description: 'A modern functional soda brand inspired by classic flavors but made with better ingredients.',
-    themeColor: 'hsl(289 44% 53%)', // Vibrant grape purple
+    themeColor: 'hsl(289 44% 53%)',
     sequence: {
       urls: generateFrameUrls(
         'https://omqaodalyvzbrvckcumi.supabase.co/storage/v1/object/public/assets/soda2/frame_{frame}.webp',
@@ -61,7 +61,7 @@ export const drinkVariants: DrinkVariant[] = [
     name: 'Lemon',
     subtitle: 'Ginger Soda',
     description: 'Bright and refreshing citrus soda with natural lemon spark and crisp bubbles.',
-    themeColor: 'hsl(55 90% 60%)', // A bright lemon yellow
+    themeColor: 'hsl(55 90% 60%)',
     sequence: {
       urls: generateFrameUrls(
         'https://omqaodalyvzbrvckcumi.supabase.co/storage/v1/object/public/assets/soda3/frame_{frame}.webp',

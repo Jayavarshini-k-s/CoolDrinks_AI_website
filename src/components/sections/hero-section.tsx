@@ -1,8 +1,8 @@
 'use client';
 
-import React, { type HTMLImageElement } from 'react';
+import React from 'react';
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { drinkVariants, type DrinkVariant } from '@/lib/drink-data';
+import { drinkVariants } from '@/lib/drink-data';
 import useImagePreloader from '@/hooks/use-image-preloader';
 import { Button } from '@/components/ui/button';
 import { ArrowUp, ArrowDown, Twitter, Instagram, Facebook, LoaderCircle } from 'lucide-react';
@@ -22,13 +22,21 @@ export default function HeroSection({ initialImages }: HeroSectionProps) {
 
   const currentVariant = drinkVariants[currentVariantIndex];
   const { urls: preloadUrls } = currentVariant.sequence;
-  const { images: preloadedImages, loaded: variantLoaded } = useImagePreloader(preloadUrls);
+  
+  // Only preload if it's not the first variant (which is already preloaded by the parent)
+  // or if we've switched back to it and somehow lost the images.
+  const { images: preloadedImages, loaded: variantLoaded } = useImagePreloader(
+    currentVariantIndex === 0 ? [] : preloadUrls
+  );
 
   useEffect(() => {
-    if (variantLoaded) {
+    // If we are on variant 0, use initialImages.
+    if (currentVariantIndex === 0) {
+      setImages(initialImages);
+    } else if (variantLoaded && preloadedImages.length > 0) {
       setImages(preloadedImages);
     }
-  }, [variantLoaded, preloadedImages]);
+  }, [currentVariantIndex, variantLoaded, preloadedImages, initialImages]);
 
   const changeVariant = useCallback((direction: 'next' | 'prev') => {
     setIsTextVisible(false);
@@ -41,21 +49,15 @@ export default function HeroSection({ initialImages }: HeroSectionProps) {
         return (prevIndex - 1 + total) % total;
       });
       setIsTextVisible(true);
-    }, 500); // Corresponds to fade-in-out transition duration
+    }, 500);
   }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas || images.length === 0 || !variantLoaded) return;
+    if (!canvas || images.length === 0) return;
     
     const context = canvas.getContext('2d');
     if (!context) return;
-
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      drawFrame(0);
-    };
 
     const drawFrame = (frameIndex: number) => {
         const img = images[frameIndex];
@@ -67,12 +69,12 @@ export default function HeroSection({ initialImages }: HeroSectionProps) {
         
         let drawWidth, drawHeight, x, y;
 
-        if (imgAspectRatio > canvasAspectRatio) { // Image is wider
+        if (imgAspectRatio > canvasAspectRatio) {
             drawHeight = canvas.height;
             drawWidth = drawHeight * imgAspectRatio;
             x = (canvas.width - drawWidth) / 2;
             y = 0;
-        } else { // Image is taller or same aspect ratio
+        } else {
             drawWidth = canvas.width;
             drawHeight = drawWidth / imgAspectRatio;
             y = (canvas.height - drawHeight) / 2;
@@ -80,6 +82,12 @@ export default function HeroSection({ initialImages }: HeroSectionProps) {
         }
         
         context.drawImage(img, x, y, drawWidth, drawHeight);
+    };
+
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      handleScroll();
     };
 
     let lastFrame = -1;
@@ -107,8 +115,11 @@ export default function HeroSection({ initialImages }: HeroSectionProps) {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', resizeCanvas);
     };
-  }, [images, variantLoaded]);
+  }, [images]);
   
+  // The variant is considered "ready" if it's the initial one OR if the preloader finished
+  const isReady = currentVariantIndex === 0 || variantLoaded;
+
   return (
     <div style={{ height: `${(ANIMATION_SCROLL_HEIGHT + 1) * 100}vh` }}>
       <div className="sticky top-0 h-screen w-full overflow-hidden">
@@ -142,7 +153,7 @@ export default function HeroSection({ initialImages }: HeroSectionProps) {
             <div className="absolute right-6 md:right-8 top-1/2 -translate-y-1/2 flex items-center gap-4 text-white">
               <div className="text-right">
                 <div className="relative">
-                  {!variantLoaded && <LoaderCircle className="absolute -left-12 top-1/2 -translate-y-1/2 h-8 w-8 animate-spin text-white" />}
+                  {!isReady && <LoaderCircle className="absolute -left-12 top-1/2 -translate-y-1/2 h-8 w-8 animate-spin text-white" />}
                   <span className="text-7xl md:text-9xl font-black tracking-tighter mix-blend-difference">
                     {(currentVariantIndex + 1).toString().padStart(2, '0')}
                   </span>

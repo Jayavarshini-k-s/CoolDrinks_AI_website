@@ -13,31 +13,41 @@ export default function useImagePreloader(urls: string[]) {
       return;
     };
 
+    let isMounted = true;
     setLoaded(false);
     setProgress(0);
     
-    const imagePromises = urls.map((url, index) => {
-      return new Promise<HTMLImageElement>((resolve, reject) => {
+    const imagePromises = urls.map((url) => {
+      return new Promise<HTMLImageElement>((resolve) => {
         const img = new Image();
+        img.crossOrigin = 'anonymous';
         img.src = url;
         img.onload = () => {
+          if (isMounted) {
             setProgress(prev => prev + (100 / urls.length));
-            resolve(img);
+          }
+          resolve(img);
         };
         img.onerror = () => {
-            // Resolve even on error to not block the app
+          if (isMounted) {
             setProgress(prev => prev + (100 / urls.length));
-            resolve(img);
+          }
+          resolve(img);
         };
       });
     });
 
     Promise.all(imagePromises).then(loadedImages => {
-      setImages(loadedImages.filter(img => img.complete && img.naturalHeight !== 0));
+      if (!isMounted) return;
+      const validImages = loadedImages.filter(img => img.complete && img.naturalHeight !== 0);
+      setImages(validImages);
       setLoaded(true);
       setProgress(100);
     });
 
+    return () => {
+      isMounted = false;
+    };
   }, [urls]);
 
   return { progress, images, loaded };
