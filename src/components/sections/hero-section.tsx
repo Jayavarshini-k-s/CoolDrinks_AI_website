@@ -1,7 +1,7 @@
+
 'use client';
 
-import React from 'react';
-import { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { drinkVariants } from '@/lib/drink-data';
 import useImagePreloader from '@/hooks/use-image-preloader';
 import { Button } from '@/components/ui/button';
@@ -24,13 +24,11 @@ export default function HeroSection({ initialImages }: HeroSectionProps) {
   const { urls: preloadUrls } = currentVariant.sequence;
   
   // Only preload if it's not the first variant (which is already preloaded by the parent)
-  // or if we've switched back to it and somehow lost the images.
   const { images: preloadedImages, loaded: variantLoaded } = useImagePreloader(
     currentVariantIndex === 0 ? [] : preloadUrls
   );
 
   useEffect(() => {
-    // If we are on variant 0, use initialImages.
     if (currentVariantIndex === 0) {
       setImages(initialImages);
     } else if (variantLoaded && preloadedImages.length > 0) {
@@ -52,37 +50,37 @@ export default function HeroSection({ initialImages }: HeroSectionProps) {
     }, 500);
   }, []);
 
+  const drawFrame = useCallback((frameIndex: number, canvas: HTMLCanvasElement, context: CanvasRenderingContext2D, currentImages: HTMLImageElement[]) => {
+    const img = currentImages[frameIndex];
+    if (!img) return;
+
+    const imgAspectRatio = img.width / img.height;
+    const canvasAspectRatio = canvas.width / canvas.height;
+    
+    let drawWidth, drawHeight, x, y;
+
+    if (imgAspectRatio > canvasAspectRatio) {
+      drawHeight = canvas.height;
+      drawWidth = drawHeight * imgAspectRatio;
+      x = (canvas.width - drawWidth) / 2;
+      y = 0;
+    } else {
+      drawWidth = canvas.width;
+      drawHeight = drawWidth / imgAspectRatio;
+      y = (canvas.height - drawHeight) / 2;
+      x = 0;
+    }
+    
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.drawImage(img, x, y, drawWidth, drawHeight);
+  }, []);
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas || images.length === 0) return;
     
     const context = canvas.getContext('2d');
     if (!context) return;
-
-    const drawFrame = (frameIndex: number) => {
-        const img = images[frameIndex];
-        if (!img) return;
-        context.clearRect(0, 0, canvas.width, canvas.height);
-        
-        const imgAspectRatio = img.width / img.height;
-        const canvasAspectRatio = canvas.width / canvas.height;
-        
-        let drawWidth, drawHeight, x, y;
-
-        if (imgAspectRatio > canvasAspectRatio) {
-            drawHeight = canvas.height;
-            drawWidth = drawHeight * imgAspectRatio;
-            x = (canvas.width - drawWidth) / 2;
-            y = 0;
-        } else {
-            drawWidth = canvas.width;
-            drawHeight = drawWidth / imgAspectRatio;
-            y = (canvas.height - drawHeight) / 2;
-            x = 0;
-        }
-        
-        context.drawImage(img, x, y, drawWidth, drawHeight);
-    };
 
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
@@ -102,7 +100,7 @@ export default function HeroSection({ initialImages }: HeroSectionProps) {
       );
 
       if (frameIndex !== lastFrame) {
-        requestAnimationFrame(() => drawFrame(frameIndex));
+        requestAnimationFrame(() => drawFrame(frameIndex, canvas, context, images));
         lastFrame = frameIndex;
       }
     };
@@ -111,13 +109,15 @@ export default function HeroSection({ initialImages }: HeroSectionProps) {
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', resizeCanvas);
 
+    // Initial draw to ensure something is visible immediately
+    drawFrame(0, canvas, context, images);
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', resizeCanvas);
     };
-  }, [images]);
+  }, [images, drawFrame]);
   
-  // The variant is considered "ready" if it's the initial one OR if the preloader finished
   const isReady = currentVariantIndex === 0 || variantLoaded;
 
   return (
