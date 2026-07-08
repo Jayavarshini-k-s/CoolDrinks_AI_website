@@ -11,8 +11,8 @@
 # next.js
 /.next/
 /out/
-# Exclude the out directory from being ignored for GitHub Pages deployment
-!/out/
+firebase-debug.log
+studio.json
 
 # production
 /build
