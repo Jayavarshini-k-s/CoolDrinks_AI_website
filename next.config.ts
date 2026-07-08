@@ -1,18 +1,13 @@
 import type {NextConfig} from 'next';
 
-const isGithubActions = process.env.GITHUB_ACTIONS || false;
-let basePath = '';
-
-if (isGithubActions) {
-  // Trim off the 'owner/' from 'owner/repo'
-  const repo = process.env.GITHUB_REPOSITORY?.replace(/.*?\//, '') || '';
-  basePath = `/${repo}`;
-}
+const isProd = process.env.NODE_ENV === 'production';
+const basePath = isProd ? '/CoolDrinks_AI_website' : '';
 
 const nextConfig: NextConfig = {
   /* config options here */
   output: 'export',
   basePath: basePath,
+  assetPrefix: basePath,
   typescript: {
     ignoreBuildErrors: true,
   },
