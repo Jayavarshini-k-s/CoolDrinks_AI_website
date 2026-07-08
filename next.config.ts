@@ -1,8 +1,18 @@
 import type {NextConfig} from 'next';
 
+const isGithubActions = process.env.GITHUB_ACTIONS || false;
+let basePath = '';
+
+if (isGithubActions) {
+  // Trim off the 'owner/' from 'owner/repo'
+  const repo = process.env.GITHUB_REPOSITORY?.replace(/.*?\//, '') || '';
+  basePath = `/${repo}`;
+}
+
 const nextConfig: NextConfig = {
   /* config options here */
   output: 'export',
+  basePath: basePath,
   typescript: {
     ignoreBuildErrors: true,
   },
